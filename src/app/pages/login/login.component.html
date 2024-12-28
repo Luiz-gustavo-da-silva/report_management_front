@@ -1,0 +1,109 @@
+<div class="h-screen bg-gray-100 flex items-center justify-center p-4">
+  <div class="w-full h-full flex flex-col lg:flex-row justify-center">
+    <div
+      class="w-full lg:w-3/5 bg-gray-100 lg:flex items-center justify-center mb-6 lg:mb-0 hidden"
+    >
+      <img
+        src="assets/capa1.png"
+        alt="Illustration"
+        class="w-3/4 max-w-md lg:max-w-full"
+      />
+    </div>
+
+    <div
+      class="w-full lg:w-2/5 bg-white flex flex-col justify-center items-center p-8 rounded-2xl"
+    >
+      <div class="max-w-sm w-full">
+        <div class="flex justify-center mb-6">
+          <div class="text-3xl font-bold">TechHub</div>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">
+          Welcome back!
+        </h2>
+        <p class="text-gray-500 mb-6 text-center">Please enter your details</p>
+
+        <form class="space-y-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700"
+              >Email</label
+            >
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="example@gmail.com"
+              [class.border-red-500]="
+                form.get('email')?.touched && form.get('email')?.invalid
+              "
+              class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            />
+            <p
+              *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['required']"
+              class="text-red-500 text-sm mt-1"
+            >
+              Email is required.
+            </p>
+            <p
+              *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']"
+              class="text-red-500 text-sm mt-1"
+            >
+              Please enter a valid email address.
+            </p>
+          </div>
+
+          <div class="mb-4">
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700"
+              >Password</label
+            >
+            <div class="relative">
+              <input
+                id="password"
+                [type]="hidePassword ? 'password' : 'text'"
+                formControlName="password"
+                placeholder="Enter your password"
+                [class.border-red-500]="
+                  form.get('password')?.touched && form.get('password')?.invalid
+                "
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              />
+              <span
+                class="absolute inset-y-0 right-3 flex items-center cursor-pointer material-symbols-outlined text-gray-500 text-[20px]"
+                (click)="togglePasswordVisibility()"
+              >
+                {{ hidePassword ? "visibility" : "visibility_off" }}
+              </span>
+            </div>
+            <p
+              *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['required']"
+              class="text-red-500 text-sm mt-1"
+            >
+              Password is required.
+            </p>
+            <p
+              *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['minlength']"
+              class="text-red-500 text-sm mt-1"
+            >
+              Password must be at least 6 characters.
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-gray-900 transition"
+          >
+            Log in
+          </button>
+        </form>
+
+        <p class="mt-4 text-center text-sm text-gray-600">
+          Don't have an account?
+          <a class="text-indigo-600 hover:underline" routerLink="/auth/signup"
+            >Sign Up</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
