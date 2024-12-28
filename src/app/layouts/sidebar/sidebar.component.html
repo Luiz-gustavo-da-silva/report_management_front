@@ -1,0 +1,39 @@
+<div class="h-screen flex bg-white">
+  <aside
+    [ngClass]="{ 'w-20': isSidebarCollapsed, 'w-72': !isSidebarCollapsed }"
+    class="bg-[#090909] p-6 transition-all flex flex-col justify-between rounded-2xl m-3"
+  >
+    <div>
+      <div
+        class="flex justify-end"
+        [ngClass]="{ 'justify-center': isSidebarCollapsed }"
+      >
+        <button (click)="toggleSidebar()" class="text-white mb-4">
+          <span class="material-symbols-outlined">
+            {{ isSidebarCollapsed ? "arrow_menu_open" : "arrow_menu_close" }}
+          </span>
+        </button>
+      </div>
+
+      <ul class="space-y-2 text-white">
+        <li>
+          <a
+            routerLink="/app/home"
+            class="flex items-center space-x-4 p-2 rounded hover:bg-zinc-800 transition duration-300 cursor-pointer"
+            [ngClass]="{ 'p-0 pb-2 pt-2 justify-center': isSidebarCollapsed }"
+          >
+            <span class="material-symbols-outlined">home</span>
+            <span [class.hidden]="isSidebarCollapsed">Home</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-auto flex align-center justify-center text-white">
+      <button (click)="logout()" class="flex align-center justify-center gap-2">
+        <span class="material-symbols-outlined"> logout </span>
+        <span [class.hidden]="isSidebarCollapsed">Logout</span>
+      </button>
+    </div>
+  </aside>
+</div>
