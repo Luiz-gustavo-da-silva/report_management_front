@@ -26,6 +26,16 @@
             <span [class.hidden]="isSidebarCollapsed">Home</span>
           </a>
         </li>
+        <li>
+          <a
+            routerLink="/app/products"
+            class="flex items-center space-x-4 p-2 rounded hover:bg-zinc-800 transition duration-300 cursor-pointer"
+            [ngClass]="{ 'p-0 pb-2 pt-2 justify-center': isSidebarCollapsed }"
+          >
+            <span class="material-symbols-outlined">category</span>
+            <span [class.hidden]="isSidebarCollapsed">Products</span>
+          </a>
+        </li>
       </ul>
     </div>
 
