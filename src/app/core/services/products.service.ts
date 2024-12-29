@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AutenticacaoService, DefaultResponse } from './autenticacao.service';
-import { Product } from '../models/product-interface';
+import { Product, ProductRedu } from '../models/product-interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -49,5 +49,12 @@ export class ProductsService {
     const headers = { Authorization: `${token}` };
 
     return this.httpClient.get<Product>(`${this.baseUrl}/product/${id}`, { headers });
+  }
+  
+  getlistProductId(): Observable<ProductRedu[]> {
+    const token = this.autenticacaoService.usuarioLogado?.token;
+    const headers = { Authorization: `${token}` };
+
+    return this.httpClient.get<ProductRedu[]>(`${this.baseUrl}/product/listProductId`, { headers });
   }
 }

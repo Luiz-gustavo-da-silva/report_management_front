@@ -6,3 +6,8 @@ export interface Product {
   description: string;
   createdAt?: string;
 }
+
+export interface ProductRedu{
+  id: number;
+  name: string;
+}

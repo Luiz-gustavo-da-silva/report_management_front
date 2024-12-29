@@ -36,6 +36,16 @@
             <span [class.hidden]="isSidebarCollapsed">Products</span>
           </a>
         </li>
+        <li>
+          <a
+            routerLink="/app/stock"
+            class="flex items-center space-x-4 p-2 rounded hover:bg-zinc-800 transition duration-300 cursor-pointer"
+            [ngClass]="{ 'p-0 pb-2 pt-2 justify-center': isSidebarCollapsed }"
+          >
+            <span class="material-symbols-outlined">inventory</span>
+            <span [class.hidden]="isSidebarCollapsed">Stock</span>
+          </a>
+        </li>
       </ul>
     </div>
 
