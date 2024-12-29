@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AutenticacaoService, DefaultResponse } from './autenticacao.service';
 import { Observable } from 'rxjs';
-import { Stock, StockObj } from '../models/stock-interface';
+import { Stock, StockObj, StockProduct } from '../models/stock-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +51,16 @@ export class StockService {
     const headers = { Authorization: `${token}` };
 
     return this.httpClient.delete<DefaultResponse>(
+      `${this.baseUrl}/stock/${id}`,
+      { headers }
+    );
+  }
+
+  getStockById(id: number): Observable<StockProduct> {
+    const token = this.autenticacaoService.usuarioLogado?.token;
+    const headers = { Authorization: `${token}` };
+
+    return this.httpClient.get<StockProduct>(
       `${this.baseUrl}/stock/${id}`,
       { headers }
     );

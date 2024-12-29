@@ -18,3 +18,12 @@ export interface Stock {
   productId: number;
   quantity: number;
 }
+
+export interface StockProduct {
+  id: number;
+  productId: number;
+  quantity: number;
+  createdAt: string;
+  updatedAt: string;
+  product: Product
+}
