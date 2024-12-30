@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Atualizar Categoria</h2>
 <mat-dialog-content>
-  <form>
+  <form [formGroup]="form">
     <div class="mb-4">
       <label for="name" class="block text-sm font-medium text-gray-700"
         >Name</label
@@ -8,61 +8,105 @@
       <input
         id="name"
         type="text"
-        [(ngModel)]="product.name"
+        formControlName="name"
         name="name"
+        [class.border-red-500]="
+          form.get('name')?.touched && form.get('name')?.invalid
+        "
         required
         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
       />
+      <p
+        *ngIf="form.get('name')?.touched && form.get('name')?.errors?.['required']"
+        class="text-red-500 text-sm mt-1"
+      >
+        Campo obrigatório!
+      </p>
     </div>
 
     <div class="mb-4">
-        <label for="price" class="block text-sm font-medium text-gray-700"
-          >Price</label
-        >
-        <input
-          id="price"
-          type="number"
-          [(ngModel)]="product.price"
-          name="price"
-          required
-          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+      <label for="price" class="block text-sm font-medium text-gray-700"
+        >Price</label
+      >
+      <input
+        id="price"
+        type="number"
+        formControlName="price"
+        name="price"
+        [class.border-red-500]="
+          form.get('price')?.touched && form.get('price')?.invalid
+        "
+        required
+        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+      />
+      <p
+        *ngIf="form.get('price')?.touched && form.get('price')?.errors?.['required']"
+        class="text-red-500 text-sm mt-1"
+      >
+        Campo obrigatório, valores acima de 0!
+      </p>
+    </div>
 
-      <div class="mb-4">
-        <label for="category" class="block text-sm font-medium text-gray-700"
-          >Category</label
-        >
-        <input
-          id="category"
-          type="text"
-          [(ngModel)]="product.category"
-          name="category"
-          required
-          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+    <div class="mb-4">
+      <label for="category" class="block text-sm font-medium text-gray-700"
+        >Category</label
+      >
+      <input
+        id="category"
+        type="text"
+        formControlName="category"
+        name="category"
+        [class.border-red-500]="
+          form.get('category')?.touched && form.get('category')?.invalid
+        "
+        required
+        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+      />
+      <p
+        *ngIf="form.get('category')?.touched && form.get('category')?.errors?.['required']"
+        class="text-red-500 text-sm mt-1"
+      >
+        Campo obrigatório!
+      </p>
+    </div>
 
-      <div class="mb-4">
-        <label for="description" class="block text-sm font-medium text-gray-700"
-          >Description</label
-        >
-        <input
-          id="description"
-          type="text"
-          [(ngModel)]="product.description"
-          name="description"
-          required
-          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-        />
-      </div>
+    <div class="mb-4">
+      <label for="description" class="block text-sm font-medium text-gray-700"
+        >Description</label
+      >
+      <input
+        id="description"
+        type="text"
+        formControlName="description"
+        name="description"
+        [class.border-red-500]="
+        form.get('description')?.touched && form.get('description')?.errors?.['required']
+      "
+        required
+        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+      />
+      <p
+        *ngIf="
+          form.get('description')?.touched && form.get('description')?.invalid
+        "
+        class="text-red-500 text-sm mt-1"
+      >
+        Por favor, selecione um produto.
+      </p>
+    </div>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <div class="w-full flex justify-end align-bottom mx-4 gap-3">
     <button mat-button (click)="onClose()">Cancelar</button>
-    <button color="primary" (click)="onSave()" class="py-2 px-4 bg-black text-white rounded-md hover:bg-gray-900 transition">Salvar</button>
+    <button
+      color="primary"
+      type="button"
+      (click)="onSave()"
+      class="py-2 px-4 bg-black text-white rounded-md hover:bg-gray-900 transition"
+    >
+      Salvar
+    </button>
   </div>
-
 </mat-dialog-actions>
