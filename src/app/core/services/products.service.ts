@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AutenticacaoService, DefaultResponse } from './autenticacao.service';
 import { Product, ProductRedu } from '../models/product-interface';
 import { Observable } from 'rxjs';
+import { FilterProduct } from '../models/filter-product-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,18 @@ export class ProductsService {
     private autenticacaoService: AutenticacaoService
   ) {}
 
-  findAll(): Observable<Product[]> {
+  findAll(filter: FilterProduct): Observable<any> {
     const token = this.autenticacaoService.usuarioLogado?.token;
     const headers = { Authorization: `${token}` };
-
-    return this.httpClient.get<Product[]>(`${this.baseUrl}/product`, { headers });
+  
+    let params = new HttpParams();
+    Object.entries(filter).forEach(([key, value]) => {
+      if (value !== null && value !== undefined && value !== '') {
+        params = params.append(key, String(value));
+      }
+    });
+  
+    return this.httpClient.get<any>(`${this.baseUrl}/product`, { headers, params });
   }
 
   addProduct(product: Product): Observable<DefaultResponse> {

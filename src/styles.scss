@@ -42,15 +42,15 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .snack-success {
-  background-color: #4caf50 !important; /* Verde */
+  background-color: #4caf50 !important;
   color: #fff !important;
 }
 
 .snack-error {
-  background-color: #f44336 !important; /* Vermelho */
+  background-color: #f44336 !important;
   color: #fff !important;
 }
 
-.mat-mdc-table {
+.mat-mdc-table, .mat-mdc-paginator {
   background: none !important;
 }
