@@ -1,38 +1,85 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { LayoutComponent } from '../../layouts/layout/layout.component';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { StockService } from '../../core/services/stock.service';
 import { SnackbarService } from '../../core/services/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { StockObj } from '../../core/models/stock-interface';
 import { StockModalComponent } from '../../shared/stock-modal/stock-modal.component';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { FilterStock } from '../../core/models/filter-stock-interface';
 
 @Component({
   selector: 'app-stock',
   standalone: true,
-  imports: [LayoutComponent, MatTableModule, MatPaginatorModule, CommonModule],
+  imports: [
+    LayoutComponent,
+    MatTableModule,
+    MatPaginatorModule,
+    CommonModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './stock.component.html',
   styleUrl: './stock.component.scss',
 })
 export class StockComponent {
-  displayedColumns: string[] = ['id', 'name', 'quantity', 'price', 'action'];
+  form!: FormGroup;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'category',
+    'quantity',
+    'price',
+    'action',
+  ];
   dataSource = new MatTableDataSource<any>([]);
   userRole: string | null = null;
 
   constructor(
     private stockService: StockService,
     private snackbarService: SnackbarService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.form = this.fb.nonNullable.group(
+      {
+        name: '',
+        category: '',
+        belowQuantity: [null, [Validators.min(0)]],
+        aboveQuantity: [null, [Validators.min(0)]],
+      },
+      { updateOn: 'submit' }
+    );
     this.findAll();
   }
 
   findAll() {
-    this.stockService.findAll().subscribe({
+    const formValues = this.form.getRawValue();
+
+    const form: FilterStock = {
+      name: formValues.name,
+      category: formValues.category,
+      belowQuantity: formValues.belowQuantity,
+      aboveQuantity: formValues.aboveQuantity,
+    };
+
+    this.stockService.findAll(form).subscribe({
       next: (response: StockObj) => {
         this.dataSource.data = response.data;
       },
@@ -83,5 +130,20 @@ export class StockComponent {
         this.snackbarService.showSnackBar(errorMessage, 'error');
       },
     });
+  }
+
+  onSubmit() {
+    this.findAll();
+  }
+
+  clearFilters() {
+    this.form.reset({
+      name: '',
+      category: '',
+      belowQuantity: null,
+      aboveQuantity: null
+    });
+
+    this.findAll();
   }
 }

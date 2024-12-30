@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductRedu } from '../../core/models/product-interface';
 import { ProductsService } from '../../core/services/products.service';
 
@@ -25,11 +25,13 @@ import { ProductsService } from '../../core/services/products.service';
     MatButtonModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './stock-modal.component.html',
   styleUrl: './stock-modal.component.scss',
 })
 export class StockModalComponent implements OnInit {
+  form!: FormGroup;
   stock: StockData = {
     id: 0,
     productId: -1,
@@ -41,8 +43,8 @@ export class StockModalComponent implements OnInit {
       name: '',
       price: 0,
       category: '',
-      description: ''
-    }
+      description: '',
+    },
   };
 
   getlistProductId!: ProductRedu[];
@@ -54,7 +56,8 @@ export class StockModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private stockService: StockService,
     private productService: ProductsService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private fb: FormBuilder
   ) {
     if (data) {
       this.action = true;
@@ -65,6 +68,25 @@ export class StockModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.form = this.fb.nonNullable.group(
+      {
+        productId: [this.stock.productId, Validators.required],
+        quantity: [
+          this.stock.quantity,
+          [
+            Validators.required,
+            Validators.min(1),
+            Validators.pattern("^[0-9]*$"),
+          ],
+        ],
+      },
+      { updateOn: 'submit' }
+    );
+
+    if (this.action) {
+      this.form.controls['productId'].disable();
+    }
+
     this.findAllProductRedu();
   }
 
@@ -83,19 +105,20 @@ export class StockModalComponent implements OnInit {
         this.getlistProductId = response;
       },
       error: (err) => {
-        this.snackbarService.showSnackBar(
-          'Erro ao buscar produtos.',
-          'error'
-        );
+        this.snackbarService.showSnackBar('Erro ao buscar produtos.', 'error');
       },
     });
   }
 
   updateStock() {
+    if (this.form.invalid) return;
+
+    const formValues = this.form.getRawValue();
+
     const stock: Stock = {
-      productId: Number(this.stock.productId),
-      quantity: this.stock.quantity,
-    }
+      productId: formValues.productId,
+      quantity: formValues.quantity,
+    };
 
     this.stockService.updateStock(stock).subscribe({
       next: (response) => {
@@ -115,10 +138,14 @@ export class StockModalComponent implements OnInit {
   }
 
   addStock() {
+    if (this.form.invalid) return;
+
+    const formValues = this.form.getRawValue();
+
     const stock: Stock = {
-      productId: Number(this.stock.productId),
-      quantity: this.stock.quantity
-    }
+      productId: formValues.productId,
+      quantity: formValues.quantity,
+    };
 
     this.stockService.addStock(stock).subscribe({
       next: (response) => {
@@ -129,10 +156,7 @@ export class StockModalComponent implements OnInit {
         this.onClose();
       },
       error: (err) => {
-        this.snackbarService.showSnackBar(
-          'Erro ao cadastrar stock.',
-          'error'
-        );
+        this.snackbarService.showSnackBar('Erro ao cadastrar stock.', 'error');
       },
     });
   }

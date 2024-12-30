@@ -22,7 +22,6 @@ import { FilterProduct } from '../../core/models/filter-product-interface';
 })
 export class ProductsComponent {
   form!: FormGroup;
-
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -56,7 +55,6 @@ export class ProductsComponent {
         category: '',
         minPrice: [null, [Validators.min(0)]],
         maxPrice: [null, [Validators.min(0)]],
-        offset: 0,
       },
       { updateOn: 'submit' }
     );
@@ -137,8 +135,7 @@ export class ProductsComponent {
       name: '',
       category: '',
       minPrice: null,
-      maxPrice: null,
-      offset: 0,
+      maxPrice: null
     });
   
     this.findAll();
