@@ -1,15 +1,21 @@
-<h2 mat-dialog-title><span *ngIf="action">Atualizar</span> <span *ngIf="!action">Adicionar</span> Stock</h2>
-<mat-dialog-content>
-  <form [formGroup]="form" (ngSubmit)="onSave()">
+<h2 mat-dialog-title>
+  <span *ngIf="action">Atualizar</span>
+  <span *ngIf="!action">Adicionar</span> Stock
+</h2>
+<form [formGroup]="form" (ngSubmit)="onSave()">
+  <mat-dialog-content>
     <div class="mb-4">
-      <label for="product" class="block text-sm font-medium text-gray-700"
+      <label for="productId" class="block text-sm font-medium text-gray-700"
         >Produto</label
       >
       <select
-        id="product"
+        id="productId"
         formControlName="productId"
-        name="product"
+        name="productId"
         required
+        [class.border-red-500]="
+          form.get('productId')?.touched && form.get('productId')?.invalid
+        "
         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
       >
         <option [value]="-1" disabled [selected]="!stock.productId">
@@ -19,6 +25,13 @@
           {{ product.name }}
         </option>
       </select>
+
+      <p
+        *ngIf="form.get('productId')?.touched && form.get('productId')?.invalid"
+        class="text-red-500 text-sm mt-1"
+      >
+        Por favor, selecione um produto.
+      </p>
     </div>
 
     <div class="mb-4">
@@ -30,22 +43,32 @@
         type="number"
         formControlName="quantity"
         name="quantity"
+        [class.border-red-500]="
+          form.get('quantity')?.touched && form.get('quantity')?.invalid
+        "
         required
         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
       />
-    </div>
-  </form>
-</mat-dialog-content>
 
-<mat-dialog-actions>
-  <div class="w-full flex justify-end align-bottom mx-4 gap-3">
-    <button mat-button (click)="onClose()">Cancelar</button>
-    <button
-      color="primary"
-      (click)="onSave()"
-      class="py-2 px-4 bg-black text-white rounded-md hover:bg-gray-900 transition"
-    >
-      Salvar
-    </button>
-  </div>
-</mat-dialog-actions>
+      <p
+        *ngIf="form.get('quantity')?.touched && form.get('quantity')?.errors"
+        class="text-red-500 text-sm mt-1"
+      >
+        A quantidade deve ser um número maior ou igual a 1 e precisa ser inteira.
+      </p>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="w-full flex justify-end align-bottom mx-4 gap-3">
+      <button mat-button (click)="onClose()" type="button">Cancelar</button>
+      <button
+        type="submit"
+        color="primary"
+        class="py-2 px-4 bg-black text-white rounded-md hover:bg-gray-900 transition"
+      >
+        Salvar
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>
