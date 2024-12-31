@@ -77,7 +77,7 @@
     <div class="flex justify-between border-t border-gray-300 pt-2">
       <span class="font-medium text-gray-600">Total da Venda:</span>
       <span class="font-semibold text-blue-600"
-        >R$ {{ stockProduct.product.price * sale.quantity }}</span
+        >R$ {{ (stockProduct.product.price || 0) * (form.get('quantity')?.value || 0) | number:'1.2-2' }}</span
       >
     </div>
   </div>

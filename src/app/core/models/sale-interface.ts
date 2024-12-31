@@ -2,6 +2,8 @@ import { Product } from './product-interface';
 
 export interface SaleObj {
   count: number;
+  totalSales: number,
+  totalProductsSold: number,
   data: SaleData[];
 }
 

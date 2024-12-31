@@ -14,6 +14,74 @@
     </div>
   </div>
 
+  <div class="border border-gray-300 rounded-2xl w-full p-3 mb-6">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <input
+            id="startDate"
+            type="date"
+            formControlName="startDate"
+            placeholder="Start Date"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <input
+            id="endDate"
+            type="date"
+            formControlName="endDate"
+            placeholder="End Date"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div class="flex justify-between items-center space-x-4">
+          <button
+            type="button"
+            class="py-2 px-4 text-black hover:text-blue-600"
+            (click)="clearFilters()"
+          >
+            Clear
+          </button>
+
+          <button
+            type="submit"
+            class="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-gray-900 transition"
+          >
+            Filter
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm">
+    </div>
+    <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm">
+    </div>
+    <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm">
+      <span class="text-sm font-medium text-gray-500">Valor Total das Vendas</span>
+      <span class="text-2xl font-bold text-black">{{ totalSales }}</span>
+    </div>
+    <div class="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm">
+      <span class="text-sm font-medium text-gray-500">Q. de Produtos Vendidos</span>
+      <span class="text-2xl font-bold text-black">{{ totalProductsSold }}</span>
+    </div>
+  </div>
+
   <div class="border border-gray-300 rounded-2xl">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="saleId">
@@ -22,7 +90,7 @@
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <th mat-header-cell *matHeaderCellDef>Name product</th>
         <td mat-cell *matCellDef="let element">{{ element.product.name }}</td>
       </ng-container>
 
