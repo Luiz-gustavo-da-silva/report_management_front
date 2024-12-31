@@ -76,7 +76,7 @@ export class StockModalComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.nonNullable.group(
       {
-        productId: [this.stock.productId, Validators.required],
+        productId: [this.stock.productId, [Validators.required, Validators.min(0)]],
         quantity: [
           this.stock.quantity,
           [
