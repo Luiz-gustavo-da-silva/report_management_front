@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -26,11 +32,13 @@ import { StockService } from '../../core/services/stock.service';
     MatButtonModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './sale-modal.component.html',
   styleUrl: './sale-modal.component.scss',
 })
-export class SaleModalComponent {
+export class SaleModalComponent implements OnInit {
+  form!: FormGroup;
   action: boolean = false;
   getlistProductId!: ProductRedu[];
 
@@ -50,8 +58,8 @@ export class SaleModalComponent {
       name: '',
       price: 0,
       category: '',
-      description: ''
-    }
+      description: '',
+    },
   };
 
   constructor(
@@ -59,10 +67,22 @@ export class SaleModalComponent {
     private salesService: SalesService,
     private snackbarService: SnackbarService,
     private productService: ProductsService,
-    private stockService: StockService
+    private stockService: StockService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.form = this.fb.nonNullable.group({
+      productId: [-1, [Validators.required, Validators.min(0),]],
+      quantity: [
+        0,
+        [
+          Validators.required,
+          Validators.min(1),
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
+    });
     this.findAllProductRedu();
   }
 
@@ -82,8 +102,22 @@ export class SaleModalComponent {
   }
 
   addSale() {
-    this.sale.productId = Number(this.sale.productId);
-    this.salesService.addSale(this.sale).subscribe({
+    if (this.form.invalid) {
+      this.snackbarService.showSnackBar(
+        'Por favor, corrija os erros antes de salvar.',
+        'error'
+      );
+      return;
+    }
+
+    const formValues = this.form.getRawValue();
+
+    const sale: Stock = {
+      productId: Number(formValues.productId),
+      quantity: Number(formValues.quantity),
+    };
+
+    this.salesService.addSale(sale).subscribe({
       next: (response) => {
         this.snackbarService.showSnackBar(
           'Sale adicionada com sucesso!',
@@ -98,13 +132,15 @@ export class SaleModalComponent {
     });
   }
 
-  getStockById(){
+  getStockById() {
     this.stockProduct.quantity = 0;
     this.stockProduct.product.price = 0;
 
-    this.stockService.getStockById(this.sale.productId).subscribe({
+    const formValues = this.form.getRawValue();
+
+    this.stockService.getStockById(formValues.productId).subscribe({
       next: (response) => {
-        if(response){
+        if (response) {
           this.stockProduct = response;
         }
       },
@@ -113,6 +149,5 @@ export class SaleModalComponent {
         this.snackbarService.showSnackBar(errorMessage, 'error');
       },
     });
-
   }
 }

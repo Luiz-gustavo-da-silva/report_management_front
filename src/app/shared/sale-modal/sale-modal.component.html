@@ -2,15 +2,18 @@
   Adicionar Venda
 </h2>
 <mat-dialog-content class="space-y-6">
-  <form class="space-y-4">
+  <form class="space-y-4" [formGroup]="form">
     <div>
       <label for="product" class="block text-sm font-medium text-gray-700">
         Produto
       </label>
       <select
         id="product"
-        [(ngModel)]="sale.productId"
+        formControlName="productId"
         name="product"
+        [class.border-red-500]="
+          form.get('productId')?.touched && form.get('productId')?.invalid
+        "
         [disabled]="action"
         required
         (change)="getStockById()"
@@ -23,6 +26,12 @@
           {{ product.name }}
         </option>
       </select>
+      <p
+        *ngIf="form.get('productId')?.touched && form.get('productId')?.errors"
+        class="text-red-500 text-sm mt-1"
+      >
+        Campo obrigatório!
+      </p>
     </div>
 
     <div>
@@ -32,14 +41,23 @@
       <input
         id="quantity"
         type="number"
-        [(ngModel)]="sale.quantity"
+        formControlName="quantity"
         name="quantity"
         min="1"
         step="1"
+        [class.border-red-500]="
+          form.get('quantity')?.touched && form.get('quantity')?.invalid
+        "
         required
         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
         placeholder="Digite a quantidade"
       />
+      <p
+      *ngIf="form.get('quantity')?.touched && form.get('quantity')?.errors"
+      class="text-red-500 text-sm mt-1"
+    >
+      Campo obrigatório, valores acima de 0 e somente números inteiros!
+    </p>
     </div>
   </form>
 
@@ -69,6 +87,7 @@
   <div class="w-full flex justify-end gap-3">
     <button
       mat-button
+      type="button"
       (click)="onClose()"
       class="py-2 px-4 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition"
     >
@@ -77,6 +96,7 @@
     <!-- Botão Salvar -->
     <button
       (click)="addSale()"
+      type="button"
       class="py-2 px-4 bg-black text-white rounded-md hover:bg-gray-900 transition"
     >
       Salvar
