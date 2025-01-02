@@ -37,3 +37,7 @@ Api própria ![Link](https://github.com/Luiz-gustavo-da-silva/report_management)
 ![Foto da aplicação](/src/assets/c5.png)
 
 ![Foto da aplicação](/src/assets/c6.png)
+
+![Foto da aplicação](/src/assets/c7.png)
+
+![Foto da aplicação](/src/assets/c8.png)
