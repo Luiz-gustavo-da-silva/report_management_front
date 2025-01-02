@@ -1,27 +1,39 @@
-# ReportManagementFront
+# AuthAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+Projeto WEB desenvolvido para gerenciamento de estoque.
 
-## Development server
+# Ferramentas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular 17+
+- Angular material
+- Mui
+- Tailwind
+- ngx-mask
+- Jwt
 
-## Code scaffolding
+# Funcionalidades
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Autenticação dos usuários (login, signup e change password) com token JWT e persistência no local storage;
+- Controle do tipo de usuário (admin e user);
+- Gerenciamento de produtos (criação, edição, exclusão e buscar);
+- Gerenciamento de stock (criação, edição, exclusão e buscar);
+- Gerenciamento de sales (criação, busca e exclusão);
+- Contadores de vendas;
 
-## Build
+# Api
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Api própria ![Link](https://github.com/Luiz-gustavo-da-silva/report_management)
 
-## Running unit tests
+# Foto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![Foto da aplicação](/src/assets/c1.png)
 
-## Running end-to-end tests
+![Foto da aplicação](/src/assets/c2.png)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![Foto da aplicação](/src/assets/c3.png)
 
-## Further help
+![Foto da aplicação](/src/assets/c4.png)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![Foto da aplicação](/src/assets/c5.png)
+
+![Foto da aplicação](/src/assets/c6.png)
