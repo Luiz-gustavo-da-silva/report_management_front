@@ -13,8 +13,8 @@ Projeto WEB desenvolvido para gerenciamento de estoque.
 
 # Funcionalidades
 
-- Autenticação dos usuários (login, signup e change password) com token JWT e persistência no local storage;
-- Controle do tipo de usuário (admin e user);
+- Autenticação dos usuários (login e signup) com token JWT e persistência na local storage;
+- Controle do tipo de usuário;
 - Gerenciamento de produtos (criação, edição, exclusão e buscar);
 - Gerenciamento de stock (criação, edição, exclusão e buscar);
 - Gerenciamento de sales (criação, busca e exclusão);
