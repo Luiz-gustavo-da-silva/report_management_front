@@ -52,11 +52,11 @@ export class LoginComponent {
 
     this.autenticacaoService.login(form).subscribe({
       next: () => {
-        this.snackbarService.showSnackBar("Login successfully!", "success");
+        this.snackbarService.showSnackBar("Login com sucesso!", "success");
         this.router.navigateByUrl('/app/home');
       },
       error: (err) => {
-        this.snackbarService.showSnackBar("Login error", "error")
+        this.snackbarService.showSnackBar("Erro no login", "error")
       },
     });
   }

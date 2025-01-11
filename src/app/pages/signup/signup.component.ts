@@ -55,11 +55,11 @@ export class SignupComponent {
 
     this.autenticacaoService.signup(form).subscribe({
       next: (response) => {
-        this.snackbarService.showSnackBar('sigup successfully!', 'success');
+        this.snackbarService.showSnackBar('Cadastrado com sucesso!', 'success');
         this.router.navigateByUrl('/auth/login');
       },
       error: (err) => {
-        this.snackbarService.showSnackBar('Error signup!', 'error');
+        this.snackbarService.showSnackBar('Erro no cadastro!', 'error');
       },
     });
   }

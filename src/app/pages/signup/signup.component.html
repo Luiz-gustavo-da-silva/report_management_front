@@ -1,7 +1,8 @@
 <div class="h-screen bg-gray-100 flex items-center justify-center p-4">
   <div class="w-full h-full flex flex-col lg:flex-row justify-center">
-
-    <div class="w-full lg:w-3/5 bg-gray-100 lg:flex items-center justify-center mb-6 lg:mb-0 hidden">
+    <div
+      class="w-full lg:w-3/5 bg-gray-100 lg:flex items-center justify-center mb-6 lg:mb-0 hidden"
+    >
       <img src="assets/capa1.png" alt="Illustration" class="w-3/4" />
     </div>
 
@@ -13,22 +14,22 @@
           <div class="text-3xl font-bold">TechHub</div>
         </div>
         <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">
-          Create an Account
+          Crie sua conta
         </h2>
         <p class="text-gray-500 mb-6 text-center">
-          Please fill in your details to sign up
+          Por favor preencha seus dados para se inscrever
         </p>
 
         <form class="space-y-4" [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-gray-700"
-              >Name</label
+              >Nome</label
             >
             <input
               id="name"
               type="text"
               formControlName="name"
-              placeholder="Your full name"
+              placeholder="Seu nome"
               [class.border-red-500]="
                 form.get('name')?.touched && form.get('name')?.invalid
               "
@@ -38,13 +39,13 @@
               *ngIf="form.get('name')?.touched && form.get('name')?.errors?.['required']"
               class="text-red-500 text-sm mt-1"
             >
-              Name is required.
+              Name é obrigatório!
             </p>
             <p
               *ngIf="form.get('name')?.touched && form.get('name')?.errors?.['minlength']"
               class="text-red-500 text-sm mt-1"
             >
-              Name must be at least 6 characters.
+              O nome deve ter pelo menos 6 caracteres.
             </p>
           </div>
 
@@ -56,7 +57,7 @@
               id="email"
               type="email"
               formControlName="email"
-              placeholder="example@gmail.com"
+              placeholder="exemplo@gmail.com"
               [class.border-red-500]="
                 form.get('email')?.touched && form.get('email')?.invalid
               "
@@ -66,13 +67,13 @@
               *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['required']"
               class="text-red-500 text-sm mt-1"
             >
-              Email is required.
+              Email é obrigatório!
             </p>
             <p
               *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']"
               class="text-red-500 text-sm mt-1"
             >
-              Please enter a valid email address.
+              Insira um endereço de e-mail válido.
             </p>
           </div>
 
@@ -87,7 +88,7 @@
                 id="password"
                 [type]="hidePassword ? 'password' : 'text'"
                 formControlName="password"
-                placeholder="Enter your password"
+                placeholder="Digite sua senha"
                 [class.border-red-500]="
                   form.get('password')?.touched && form.get('password')?.invalid
                 "
@@ -104,13 +105,13 @@
               *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['required']"
               class="text-red-500 text-sm mt-1"
             >
-              Password is required.
+              Password é obrigatório!
             </p>
             <p
               *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['minlength']"
               class="text-red-500 text-sm mt-1"
             >
-              Password must be at least 6 characters.
+              A senha deve ter pelo menos 6 caracteres.
             </p>
           </div>
 
@@ -123,7 +124,7 @@
         </form>
 
         <p class="mt-4 text-center text-sm text-gray-600">
-          Already have an account?
+          Já tem uma conta? 
           <a class="text-indigo-600 hover:underline" routerLink="/auth/login"
             >Log In</a
           >
