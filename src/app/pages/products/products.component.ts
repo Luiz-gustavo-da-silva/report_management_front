@@ -76,7 +76,7 @@ export class ProductsComponent {
       },
       error: (err) => {
         this.snackbarService.showSnackBar(
-          'Error find all. Please try again',
+          'Erro ao localizar tudo. Por favor, tente novamente',
           'error'
         );
       },

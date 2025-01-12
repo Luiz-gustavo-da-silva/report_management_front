@@ -85,7 +85,7 @@ export class StockComponent {
       },
       error: (err) => {
         this.snackbarService.showSnackBar(
-          'Error find all. Please try again',
+          'Erro ao localizar tudo. Por favor, tente novamente',
           'error'
         );
       },
@@ -118,7 +118,7 @@ export class StockComponent {
     this.stockService.deleteStock(id).subscribe({
       next: () => {
         this.snackbarService.showSnackBar(
-          'Produto deletado do estoque com sucesso!',
+          'Stock do Produto deletado com sucesso!',
           'success'
         );
         this.findAll();
@@ -126,7 +126,7 @@ export class StockComponent {
       error: (err) => {
         const errorMessage =
           err.error?.message ||
-          'Erro ao deletar produto. Por favor, tente novamente!';
+          'Erro ao deletar stock do produto. Por favor, tente novamente!';
         this.snackbarService.showSnackBar(errorMessage, 'error');
       },
     });

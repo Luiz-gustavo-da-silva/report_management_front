@@ -114,7 +114,7 @@ export class SalesComponent {
       },
       error: (err) => {
         this.snackbarService.showSnackBar(
-          'Error find all. Please try again',
+          'Erro ao localizar tudo. Por favor, tente novamente',
           'error'
         );
       },
@@ -136,7 +136,7 @@ export class SalesComponent {
     this.salesService.deleteSale(id).subscribe({
       next: () => {
         this.snackbarService.showSnackBar(
-          'Sale deletada com sucesso!',
+          'Venda deletada com sucesso!',
           'success'
         );
         this.findAll();
@@ -144,7 +144,7 @@ export class SalesComponent {
       error: (err) => {
         const errorMessage =
           err.error?.message ||
-          'Erro ao deletar sale. Por favor, tente novamente!';
+          'Erro ao deletar Venda. Por favor, tente novamente!';
         this.snackbarService.showSnackBar(errorMessage, 'error');
       },
     });

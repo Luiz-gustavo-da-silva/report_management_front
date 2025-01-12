@@ -1,7 +1,7 @@
 <app-layout>
   <div class="w-full flex align-center justify-between mb-4">
     <div>
-      <h1 class="text-2xl font-bold text-black mb-6">Products</h1>
+      <h1 class="text-2xl font-bold text-black mb-6">Produtos</h1>
     </div>
 
     <div>
@@ -9,7 +9,7 @@
         class="py-2 px-4 bg-black text-white rounded-md hover:bg-gray-900 transition"
         (click)="addProduct()"
       >
-        + Product
+        + Produto
       </button>
     </div>
   </div>
@@ -22,7 +22,7 @@
             id="name"
             type="text"
             formControlName="name"
-            placeholder="Name"
+            placeholder="Nome"
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
@@ -32,7 +32,7 @@
             id="category"
             type="text"
             formControlName="category"
-            placeholder="Category"
+            placeholder="Categoria"
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
@@ -43,7 +43,7 @@
             type="number"
             min="0"
             formControlName="minPrice"
-            placeholder="Min Price"
+            placeholder="Preço mínimo"
             [class.border-red-500]="
             form.get('minPrice')?.touched && form.get('minPrice')?.invalid
           "
@@ -62,7 +62,7 @@
             type="number"
             formControlName="maxPrice"
             min="0"
-            placeholder="Max Price"
+            placeholder="Preço máximo"
             [class.border-red-500]="
             form.get('maxPrice')?.touched && form.get('maxPrice')?.invalid
           "
@@ -82,14 +82,14 @@
             class="py-2 px-4 text-black hover:text-blue-600"
             (click)="clearFilters()"
           >
-            Clear
+            limpar
           </button>
 
           <button
             type="submit"
             class="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-gray-900 transition"
           >
-            Filter
+            Filtrar
           </button>
         </div>
       </div>
@@ -104,48 +104,48 @@
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef>Category</th>
+        <th mat-header-cell *matHeaderCellDef>Categoria</th>
         <td mat-cell *matCellDef="let element">{{ element.category }}</td>
       </ng-container>
 
       <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <th mat-header-cell *matHeaderCellDef>Preço</th>
         <td mat-cell *matCellDef="let element">{{ element.price }}</td>
       </ng-container>
 
       <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <th mat-header-cell *matHeaderCellDef>Descrição</th>
         <td mat-cell *matCellDef="let element">{{ element.description }}</td>
       </ng-container>
 
       <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef>CreatedAt</th>
+        <th mat-header-cell *matHeaderCellDef>Criado em</th>
         <td mat-cell *matCellDef="let element">
           {{ element.createdAt | date : "dd/MM/yyyy" }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef class="text-center">Action</th>
+        <th mat-header-cell *matHeaderCellDef class="text-center">Ação</th>
         <td mat-cell *matCellDef="let element">
           <div class="flex justify-center items-center gap-2">
             <button
               class="w-[35px] h-[35px] bg-black text-white rounded-full flex justify-center items-center hover:bg-gray-900 focus:outline-none"
               (click)="updateProduct(element)"
             >
-              <span class="material-symbols-outlined text-lg">edit</span>
+              <span class="material-symbols-outlined text-lg">Editar</span>
             </button>
 
             <button
               class="w-[35px] h-[35px] bg-red-700 text-white rounded-full flex justify-center items-center hover:bg-red-900 focus:outline-none"
               (click)="deleteProduct(element.id)"
             >
-              <span class="material-symbols-outlined text-lg">delete</span>
+              <span class="material-symbols-outlined text-lg">Deletar</span>
             </button>
           </div>
         </td>
