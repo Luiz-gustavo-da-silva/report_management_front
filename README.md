@@ -26,18 +26,20 @@ Api própria ![Link](https://github.com/Luiz-gustavo-da-silva/report_management)
 
 # Foto
 
-![Foto da aplicação](/src/assets/c1.png)
+![Foto da aplicação](/src/assets/i1.png)
 
-![Foto da aplicação](/src/assets/c2.png)
+![Foto da aplicação](/src/assets/i2.png)
 
-![Foto da aplicação](/src/assets/c3.png)
+![Foto da aplicação](/src/assets/i3.png)
 
-![Foto da aplicação](/src/assets/c4.png)
+![Foto da aplicação](/src/assets/i4.png)
 
-![Foto da aplicação](/src/assets/c5.png)
+![Foto da aplicação](/src/assets/i5.png)
 
-![Foto da aplicação](/src/assets/c6.png)
+![Foto da aplicação](/src/assets/i6.png)
 
-![Foto da aplicação](/src/assets/c7.png)
+![Foto da aplicação](/src/assets/i7.png)
 
-![Foto da aplicação](/src/assets/c8.png)
+![Foto da aplicação](/src/assets/i8.png)
+
+![Foto da aplicação](/src/assets/i8.png)
